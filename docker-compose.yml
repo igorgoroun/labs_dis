@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:14
+    container_name: lab_dis
+    restart: unless-stopped
+    # user: "501:20"
+    environment:
+      POSTGRES_DB: "lab_dis"
+      POSTGRES_USER: "igor"
+      POSTGRES_PASSWORD: "Qwerty123"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      -
+        type: bind
+        source: ./postgres
+        target: /var/lib/postgresql/data

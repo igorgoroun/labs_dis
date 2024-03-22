@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block title %}ЛР №1{% endblock %}
+
+{% block content %}
+    <form action="" role="form" method="post">
+
+        <div class="row">
+            <div class="mb-3 col-6 col-lg-4">
+                <label for="connection_class" class="form-label">Тип підключення</label>
+                <select name="connection_class" class="form-select" id="connection_class">
+                    {% for conn, class in connection_classes.items() %}
+                        <option value="{{ conn }}" {% if conn == form.connection_class %}selected{% endif %}>{{ class.__name__ }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-12">
+                <textarea class="form-control" name="query" placeholder="INSERT або UPDATE запит" rows="4">{{ form.query }}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary">Виконати</button>
+            </div>
+            <div class="col-8">
+                {% if execution_time %}
+                <p class="text-muted">{{ execution_time|round }} ms</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </form>
+    <br/>
+    {% if columns and result_table %}
+    <kbd>product</kbd><br>
+    <table class="table font-monospace table-striped" role="table">
+        <thead>
+            <tr>
+                {% for col_name in columns %}
+                <th>{{ col_name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in result_table %}
+            <tr>
+                {% for val in row %}
+                <td>{{ val }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+
+{% endblock %}
