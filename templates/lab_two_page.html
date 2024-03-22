@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}ЛР №2{% endblock %}
+
+{% block content %}
+    <form action="" role="form" method="post">
+
+        <div class="row">
+            <div class="mb-3 col-6 col-lg-4">
+                {% for conn, class in database_classes.items() %}
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="database_class" value="{{ conn }}" id="{{ class.__name__ }}" {% if conn == form.database_class or loop.index0==0 %}checked{% endif %}>
+                    <label class="form-check-label" for="{{ class.__name__ }}">{{ class.__name__ }}</label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-12">
+                <textarea class="form-control" name="query" placeholder="INSERT / UPDATE / DELETE запит" rows="4">{{ form.query }}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <button type="submit" class="btn btn-primary">Виконати</button>
+            </div>
+            <div class="col-8">
+                {% if execution_time %}
+                <p class="text-muted">{{ execution_time|round }} ms</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </form>
+    <br/>
+    {% if result_table %}
+    <div class="row">
+    {% for db_name, db_data in result_table.items() %}
+        <div class="col-12">
+        {% if db_data %}
+            <kbd>{{ db_name }}</kbd><br>
+            <table class="table font-monospace table-striped" role="table">
+                <thead>
+                    <tr>
+                        {% for col_name in db_data.headers %}
+                        <th>{{ col_name }}</th>
+                        {% endfor %}
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in db_data.data %}
+                    <tr>
+                        {% for val in row.values() %}
+                        <td>{{ val }}</td>
+                        {% endfor %}
+                        <td><a href="{{ url_for('move_record', source_db=db_name, source_id=row.id) }}" class="btn btn-sm btn-outline-dark">move</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+
+    {% endif %}
+
+
+{% endblock %}

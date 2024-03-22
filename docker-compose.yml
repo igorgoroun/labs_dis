@@ -5,11 +5,9 @@ services:
     container_name: lab_dis
     restart: unless-stopped
     # user: "501:20"
+    env_file: .env
     environment:
-      POSTGRES_DB: "lab_dis"
-      POSTGRES_USER: "igor"
-      POSTGRES_PASSWORD: "Qwerty123"
-      PGDATA: /var/lib/postgresql/data/pgdata
+      PGDATA: "/var/lib/postgresql/data/pgdata"
     ports:
       - "5432:5432"
     volumes:
@@ -17,3 +15,16 @@ services:
         type: bind
         source: ./postgres
         target: /var/lib/postgresql/data
+
+  mysql:
+    image: mysql
+    container_name: lab_dis_mysql
+    restart: unless-stopped
+#    user: "501:20"
+    env_file: .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - type: bind
+        source: ./mysql
+        target: /var/lib/mysql

@@ -2,6 +2,7 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/mysql" />
       <excludeFolder url="file://$MODULE_DIR$/postgres" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
@@ -14,6 +15,7 @@
       <list>
         <option value="$MODULE_DIR$/templates" />
         <option value="$MODULE_DIR$/lab_01/templates" />
+        <option value="$MODULE_DIR$/lab_02/templates" />
       </list>
     </option>
   </component>
