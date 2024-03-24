@@ -16,6 +16,8 @@
         <option value="$MODULE_DIR$/templates" />
         <option value="$MODULE_DIR$/lab_01/templates" />
         <option value="$MODULE_DIR$/lab_02/templates" />
+        <option value="$MODULE_DIR$/lab_03/templates" />
+        <option value="$MODULE_DIR$/lab_04/templates" />
       </list>
     </option>
   </component>

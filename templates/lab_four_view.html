@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}ЛР №4{% endblock %}
+
+{% block content %}
+
+    {% if data %}
+    <kbd>product</kbd><br>
+    <table class="table font-monospace table-borderless" role="table">
+        <tbody>
+            {% for k, val in data.items() %}
+            <tr>
+                <td class="text-end text-muted">{{ k }}</td>
+                <td>{{ val }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td><a href="{{ url_for('lab_four_list') }}" class="btn btn-sm btn-outline-dark">&larr; back</a></td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+
+
+{% endblock %}

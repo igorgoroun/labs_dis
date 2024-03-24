@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}ЛР №4{% endblock %}
+
+{% block content %}
+
+    {% if columns and data %}
+    <kbd>products</kbd><br>
+    <table class="table font-monospace table-striped" role="table">
+        <thead>
+            <tr>
+                {% for col_name in columns %}
+                <th>{{ col_name }}</th>
+                {% endfor %}
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                {% for k, val in row.items() %}
+                <td>{{ val }}</td>
+                {% endfor %}
+                <td><a href="{{ url_for('lab_four_view', product_id=row.id) }}" class="btn btn-sm btn-outline-dark">view</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+
+{% endblock %}
